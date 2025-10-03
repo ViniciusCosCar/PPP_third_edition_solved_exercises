@@ -7,6 +7,7 @@ constexpr double ft2m = 30.48 / 100;
 
 int main(void) {
   // read double and it's units
+  std::cout << "Hello, human" << std::endl;
   std::cout << "Enter number followed by it's units ('cm', 'm', 'in' or 'ft', "
                "if no, or invalid, unit is given, the program will assume to "
                "be in 'm')"
