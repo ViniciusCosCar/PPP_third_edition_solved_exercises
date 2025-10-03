@@ -1,24 +1,28 @@
 #include <iostream>
 
 // conversion factors to meters
-constexpr int cm2m = 1 / 100;
-constexpr double in2m = 2.54 / 100;
-constexpr double ft2m = 30.48 / 100;
+constexpr double cm2m = 1.0 / 100, in2m = 2.54 / 100, ft2m = 30.48 / 100;
 
 int main(void) {
   // read double and it's units
-  std::cout << "Hello, human" << std::endl;
-  std::cout << "Enter number followed by it's units ('cm', 'm', 'in' or 'ft', "
-               "if no, or invalid, unit is given, the program will assume to "
-               "be in 'm')"
+  std::cout << "Enter number followed by it's units ('cm', 'm', 'in' or 'ft')."
+            << " If other unit is given, the program will assume to "
+               "be in meters.\n"
+            << "To exit, type <C-Z> if you are on Windows or <C-D> if you are "
+               "on a Linux/Mac machine."
             << std::endl;
 
-  double n, largest, smallest, sum = 0, n_values = 1;
-  std::string unit;
+  double n, largest, smallest, sum = 0;
+  int n_values = 0;
+  std::string unit = "";
 
-  // read input
-  std::cin >> n >> unit;
-  largest = smallest = n;
+  /*
+   * TODO: Handle cases where user types a number and enter.
+   * The user migh assume that he entered a value which will be interpreted to
+   * be in meters, but in reality, the next number will be considered it's unit,
+   * since no input has been given the "while" loop does not exit the condition
+   * and so reads the next value into "units"
+   * */
   while (std::cin >> n >> unit) {
     n_values++; // update number of values entered
 
@@ -38,15 +42,16 @@ int main(void) {
     sum += n; // sum the converted values
 
     // uptade "largest" and "smallest" depending on the value converted
-    if (n > largest)
+    if (n > largest || n_values == 1)
       largest = n;
-    else if (n < smallest)
+    if (n < smallest || n_values == 1)
       smallest = n;
   }
 
   // print the result
   unit = "m";
-  std::cout << "Sum of values entered: " << sum << unit
-            << "Largest: " << largest << unit << "Smallest = " << smallest
-            << unit << "Number of values entered: " << n_values << std::endl;
+  std::cout << "Sum of values entered: " << sum << " " << unit << "\n"
+            << "Largest: " << largest << " " << unit << "\n"
+            << "Smallest = " << smallest << " " << unit << "\n"
+            << "Number of values entered: " << n_values << std::endl;
 }
