@@ -9,7 +9,8 @@ int main(void) {
   // read double and it's units
   std::cout << "Enter number followed by it's units ('cm', 'm', 'in' or 'ft')."
             << " If other unit is given, the program will assume to "
-               "be in meters.\n"
+               "be in meters. If no unit is given, the program will assume "
+               "the next input to be the unit.\n"
             << "To exit, type <C-Z> if you are on Windows or <C-D> if you are "
                "on a Linux/Mac machine."
             << std::endl;
@@ -39,8 +40,10 @@ int main(void) {
     else if (unit == "ft")
       n = n * ft2m;
     else
-      std::cout << "Unknown or no unit was given: Considering that value was "
-                   "given in meters\n";
+      std::cout << "Unknown or no unit was given ('" << unit
+                << "'): Considering that '" << n
+                << "' was "
+                   "given in meters (m)\n";
 
     numbers.push_back(n); // add number in meters to record
     sum += n;             // increment by the number in meters
@@ -60,7 +63,7 @@ int main(void) {
   std::cout << "Numbers given" << std::endl;
   for (double ni : numbers)
     std::cout << ni << " ";
-  std::cout << std::endl;
+  std::cout << " (m)" << std::endl;
 
   // print results
   std::cout << "Number of values given: " << n_values << "\n"
